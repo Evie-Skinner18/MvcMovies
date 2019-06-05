@@ -13,6 +13,8 @@ namespace MvcMovies.Models
         {
         }
 
+        // a DB set corresponds to a table in SQL
+        // an entity corresponds to a row
         public DbSet<MvcMovies.Models.Film> Film { get; set; }
     }
 }
