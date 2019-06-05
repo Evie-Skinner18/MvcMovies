@@ -7,9 +7,14 @@ namespace MvcMovies.Controllers
 {
     public class MoviesController : Controller
     {
-        public IActionResult Index()
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        public string Index()
         {
-            return View();
+            return "Hello from the Movies Controller!";
         }
     }
 }

@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "Welcome to the Film App!";
+}
+
+    <h1>Welcome</h1>
+    
+    <ul>
+        @for (var i = 0; i < (int)ViewData["Id"]; i++)
+        {
+            <li>@ViewData["Message"]</li>
+        }
+    </ul>

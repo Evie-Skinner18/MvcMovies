@@ -20,10 +20,12 @@ namespace MvcMovies.Controllers
         
 
         // GET HelloWorld/Welcome
-        public string Welcome(string name, int id = 1)
+        public IActionResult Welcome(string name, int id = 1)
         {
-            // html encode protects us from malicious input
-            return HtmlEncoder.Default.Encode($"Welcome to the Films Database {name}! Your ID is {id}");
+            ViewData["Message"] = "Hello " + name;
+            ViewData["Id"] = id;
+            
+            return View();
         }
     }
 }
