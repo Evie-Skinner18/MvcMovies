@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Encodings.Web;
 
 namespace MvcMovies.Controllers
 {
@@ -14,16 +15,17 @@ namespace MvcMovies.Controllers
         //    return View();
         //}
 
-            // GET /HelloWorld
+            // GET /HelloWorld/Index
         public string Index()
         {
             return "Hello world! this is my default action.";
         }
 
         // GET HelloWorld/Welcome
-        public string Welcome()
+        public string Welcome(string name, int id = 1)
         {
-            return "Welcome to the Films Database!";
+            // html encode protects us from malicious input
+            return HtmlEncoder.Default.Encode($"Welcome to the Films Database {name}! Your ID is {id}");
         }
     }
 }
