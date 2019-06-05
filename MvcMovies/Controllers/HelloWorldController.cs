@@ -8,18 +8,16 @@ using System.Text.Encodings.Web;
 namespace MvcMovies.Controllers
 {
     // each method in here is an HTTP endpoint
+    // action methods here return IActionResult, not a type like string
     public class HelloWorldController : Controller
     {
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-            // GET /HelloWorld/Index
-        public string Index()
+        // GET /HelloWorld/Index
+        public IActionResult Index()
         {
-            return "Hello world! this is my default action.";
+            // if you don't specify which view, it returns the Index.cshtml view in Views/HelloWorld
+            return View();
         }
+        
 
         // GET HelloWorld/Welcome
         public string Welcome(string name, int id = 1)
