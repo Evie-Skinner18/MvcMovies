@@ -24,6 +24,7 @@ namespace MvcMovies
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        // Deoendency injection container is services and it knows which dependency you need
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
@@ -36,8 +37,13 @@ namespace MvcMovies
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            // add movies db context to dependency injection container
+            // deendency injection: the dependency is given to the CLASS from the outside
+            // a dependency is another object that your class needs in order to work. E.g FilmsController class has a dependency on
+            // MvcMoviesContext because it needs to fetch data from the db
             services.AddDbContext<MvcMoviesContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MvcMoviesContext")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -13,6 +13,13 @@ namespace MvcMovies.Controllers
     {
         private readonly MvcMoviesContext _context;
 
+        /*
+         * The constructor uses Dependency Injection to inject the database context (MvcMovieContext) into 
+         * the controller. The database context is used in each of the CRUD methods in the controller.
+         * FilmsController class is dependent on MvcMoviesContext class. So this DEPENDENCY is injected into a FilmsController
+         * object by being passed in as an argument in the ctor method. Every instance of FilmsController will 
+         * have an MvcMoviesContext from the outset
+         */
         public FilmsController(MvcMoviesContext context)
         {
             _context = context;
