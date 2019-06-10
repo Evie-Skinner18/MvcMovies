@@ -10,6 +10,7 @@ namespace MvcMovies.Models
         public string Title { get; set; }
 
         [Display(Name = "Release Date")]
+        // specify Date here so it doesn't display a big ugly time on the web app
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
         public string Genre { get; set; }
