@@ -27,8 +27,13 @@ namespace MvcMovies.Controllers
 
 
         // GET: Films, passingi n search string so you can search for a film
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string filmGenre, string searchString)
         {
+            // another funny linq query to grab all films of a partic genre
+            var genreQuery = from f in _context.Film
+                             orderby f.Genre
+                             select f.Genre;
+
             // funny looking linq query 
             var films = from f in _context.Film select f;
 
@@ -39,9 +44,21 @@ namespace MvcMovies.Controllers
                 films = films.Where(f => f.Title.Contains(searchString));
             }
 
-            // show a view of the relevant films, or jsut all teh films . In any case, show a view of some films
-            return View(await films.ToListAsync());         
+            if (!String.IsNullOrEmpty(filmGenre))
+            {
+                films = films.Where(f => f.Genre == filmGenre);
+            }
 
+            var filmGenreViewModel = new FilmGenreViewModel
+            {
+                // use distinct because don't want to see duplicate genres in there. e.g there are two films
+                // of the genre Rom Com so don't want to see Rom Com twice
+                Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                Films = await films.ToListAsync()
+            };
+
+            // show a view of the relevant films, or jsut all teh films . In any case, show a view of some films
+            return View(filmGenreViewModel);
         }
 
         // GET: Films/Details/5
