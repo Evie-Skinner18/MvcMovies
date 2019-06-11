@@ -36,15 +36,11 @@ namespace MvcMovies.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 // this is run on the DB. C# Contains = SQL LIKE
-                var relevantFilms = films.Where(f => f.Title.Contains(searchString));
-                return View(await relevantFilms.ToListAsync());
+                films = films.Where(f => f.Title.Contains(searchString));
             }
 
-            else
-            {
-                // show a view of the relevant films, or jsut all teh films . In any case, show a view of some films
-                return View(await films.ToListAsync());
-            }
+            // show a view of the relevant films, or jsut all teh films . In any case, show a view of some films
+            return View(await films.ToListAsync());         
 
         }
 

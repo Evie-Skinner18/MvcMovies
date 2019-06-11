@@ -9,6 +9,21 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<h2>Search for a Film</h2>
+<form asp-controller="Films" asp-action="Index">
+    <p>
+        @* search bar*@
+        Title: <input type="text" name="SearchString">
+        @*submit button*@
+               <input type="submit" value="Filter"/>
+    </p>
+
+
+
+
+</form>
+
 <table class="table">
     <thead>
         <tr>
