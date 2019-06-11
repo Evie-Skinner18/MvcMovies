@@ -26,10 +26,26 @@ namespace MvcMovies.Controllers
         }
 
 
-        // GET: Films
-        public async Task<IActionResult> Index()
+        // GET: Films, passingi n search string so you can search for a film
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Film.ToListAsync());
+            // funny looking linq query 
+            var films = from f in _context.Film select f;
+
+            // if user has input a search string, show films that contain their search words
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                // this is run on the DB. C# Contains = SQL LIKE
+                var relevantFilms = films.Where(f => f.Title.Contains(searchString));
+                return View(await relevantFilms.ToListAsync());
+            }
+
+            else
+            {
+                // show a view of the relevant films, or jsut all teh films . In any case, show a view of some films
+                return View(await films.ToListAsync());
+            }
+
         }
 
         // GET: Films/Details/5
