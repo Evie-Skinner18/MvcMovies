@@ -1,5 +1,4 @@
-﻿@model IEnumerable<MvcMovies.Models.Film>
-@*MvcMovies.Models.FilmGenreViewModel*@
+﻿@model MvcMovies.Models.FilmGenreViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -17,40 +16,42 @@
 @*can save the page and share it*@
 <form asp-controller="Films" asp-action="Index" method="get">
     <p>
+        @*select menu*@
+        <select asp-for="FilmGenre" asp-items="Model.Genres">
+            <option value="">All</option>
+        </select>
+
         @* search bar*@
         Title: <input type="text" name="SearchString">
+
         @*submit button*@
         <input type="submit" value="Filter" />
     </p>
-
-
-
-
 </form>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.Films[0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReleaseDate)
+                @Html.DisplayNameFor(model => model.Films[0].ReleaseDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Genre)
+                @Html.DisplayNameFor(model => model.Films[0].Genre)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Review)
-            </th>
+            </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.DisplayNameFor(model => model.Films[0].Price)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Films)
         {
             <tr>
                 <td>
